@@ -42,12 +42,26 @@ public class HomeView {
         Label hint = new Label("Spilleliste, avspilling og volumkontroll");
         hint.getStyleClass().add("hint");
 
-        
+        VBox tekst = new VBox(2, tittel, beskrivelse, hint);
+        HBox hode = new HBox(14, ikon, tekst);
+        hode.setAlignment(Pos.CENTER_LEFT);
 
+        Label status = new Label("KLAR TIL AVSPILLING");
+        status.getStyleClass().addAll("tag", "tag-groenn");
 
+        Button apne = new Button("ÅPNE SPILLER");
+        apne.getStyleClass().add("knapp-primaer");
+        apne.setMaxWidth(Double.MAX_VALUE);
+        apne.setOnAction(e -> onApneSpiller.run());
 
+        VBox kort = new VBox(12, hode, status, apne);
+        kort.getStyleClass().add("kort");
+        kort.setMaxWidth(380);
+        return kort;
+    }
 
-
+    public Parent getRoot() {
+        return root;
     }
 
 }

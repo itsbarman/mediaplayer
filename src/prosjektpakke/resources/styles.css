@@ -1,0 +1,231 @@
+/* Grunnfarger og skrift */
+.root {
+    -fx-background-color: #131417;
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 13px;
+}
+
+.label {
+    -fx-text-fill: #e6e6e6;
+}
+
+/* Topp- og statuslinje  */
+.topplinje {
+    -fx-padding: 10 16;
+    -fx-border-color: transparent transparent #2a2b30 transparent;
+}
+
+.statuslinje {
+    -fx-padding: 8 16;
+    -fx-border-color: #2a2b30 transparent transparent transparent;
+}
+
+.logo {
+    -fx-font-size: 20px;
+    -fx-font-weight: 900;
+    -fx-text-fill: white;
+}
+
+.fane {
+    -fx-background-color: transparent;
+    -fx-background-radius: 0;
+    -fx-text-fill: #9a9ca3;
+    -fx-font-family: "Consolas";
+    -fx-font-size: 12px;
+    -fx-padding: 4 10;
+    -fx-cursor: hand;
+}
+
+.fane:hover {
+    -fx-text-fill: white;
+}
+
+.fane.aktiv {
+    -fx-background-color: white;
+    -fx-text-fill: black;
+    -fx-font-weight: bold;
+}
+
+/*  Tekststiler */
+.mono {
+    -fx-font-family: "Consolas";
+}
+
+.mono-dim {
+    -fx-font-family: "Consolas";
+    -fx-font-size: 11px;
+    -fx-text-fill: #7c7e86;
+}
+
+.seksjon {
+    -fx-font-family: "Consolas";
+    -fx-font-size: 11px;
+    -fx-text-fill: #9a9ca3;
+}
+
+.tittel {
+    -fx-font-size: 26px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+}
+
+.tekst-blaa {
+    -fx-text-fill: #3b82f6;
+}
+
+.beskrivelse {
+    -fx-font-size: 14px;
+    -fx-text-fill: #c9cad0;
+}
+
+.hint {
+    -fx-text-fill: #7c7e86;
+}
+
+/*  Paneler og kort */
+.side {
+    -fx-padding: 24;
+}
+
+.kort {
+    -fx-padding: 20;
+    -fx-background-color: #17181c;
+    -fx-border-color: #2a2b30;
+}
+
+.panel {
+    -fx-padding: 20;
+}
+
+.panel-venstre {
+    -fx-padding: 20;
+    -fx-border-color: transparent #2a2b30 transparent transparent;
+}
+
+.panel-bunn {
+    -fx-padding: 16 20;
+    -fx-border-color: #2a2b30 transparent transparent transparent;
+}
+
+/*  Nummerbrikke, ikon og merker */
+.badge {
+    -fx-font-family: "Consolas";
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #0d0d0f;
+    -fx-padding: 2 8;
+}
+
+.badge-blaa {
+    -fx-background-color: #3b82f6;
+}
+
+.ikon {
+    -fx-min-width: 56;
+    -fx-min-height: 56;
+    -fx-alignment: center;
+    -fx-background-radius: 10;
+    -fx-font-size: 28px;
+    -fx-text-fill: white;
+}
+
+.ikon-blaa {
+    -fx-background-color: #3b82f6;
+}
+
+.ikon-stor {
+    -fx-font-size: 72px;
+    -fx-text-fill: #3b82f6;
+}
+
+.tag {
+    -fx-font-family: "Consolas";
+    -fx-font-size: 11px;
+    -fx-padding: 2 6;
+    -fx-border-width: 1;
+}
+
+.tag-groenn {
+    -fx-text-fill: #34d399;
+    -fx-border-color: #34d399;
+}
+
+.tag-blaa {
+    -fx-text-fill: #60a5fa;
+    -fx-border-color: #60a5fa;
+}
+
+/*  Knapper */
+.knapp-primaer {
+    -fx-background-color: white;
+    -fx-background-radius: 0;
+    -fx-text-fill: black;
+    -fx-font-family: "Consolas";
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-padding: 8 18;
+    -fx-cursor: hand;
+}
+
+.knapp-primaer:hover {
+    -fx-background-color: #d9d9d9;
+}
+
+.knapp-omriss {
+    -fx-background-color: transparent;
+    -fx-background-radius: 0;
+    -fx-border-color: #4a4b52;
+    -fx-border-radius: 0;
+    -fx-text-fill: white;
+    -fx-font-family: "Consolas";
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-padding: 8 18;
+    -fx-cursor: hand;
+}
+
+.knapp-omriss:hover {
+    -fx-border-color: white;
+}
+
+/*  Spilleliste */
+.list-view,
+.list-view:focused {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-border-color: #2a2b30;
+    -fx-padding: 0;
+}
+
+.list-cell {
+    -fx-background-color: transparent;
+    -fx-text-fill: #e6e6e6;
+    -fx-padding: 10 12;
+    -fx-border-color: transparent transparent #2a2b30 transparent;
+}
+
+.list-cell:empty {
+    -fx-border-color: transparent;
+}
+
+.list-cell:filled:hover {
+    -fx-background-color: #1e1f24;
+}
+
+.list-cell:filled:selected {
+    -fx-background-color: #23252b;
+    -fx-text-fill: white;
+}
+
+/*  Slidere */
+.slider .track {
+    -fx-background-color: #2a2b30;
+    -fx-background-radius: 0;
+    -fx-pref-height: 4;
+}
+
+.slider .thumb {
+    -fx-background-color: white;
+    -fx-background-radius: 0;
+    -fx-padding: 6;
+}

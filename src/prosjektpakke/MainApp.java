@@ -1,4 +1,4 @@
-package prosjektpakke.view;
+package prosjektpakke;
 
 import javafx.application.Application;
 import javafx.geometry.Pos;

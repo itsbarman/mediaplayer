@@ -48,32 +48,74 @@ public class PlayerView {
     }
 
     private VBox lagSpillelistePanel() {
-        root.setLeft(lagSpillelistePanel());
-        root.setCenter(lagSpillesNaaPanel());
-        root.setBottom(lagKontrollPanel());
-    }
-
-    private VBox lagSpillelistePanel() {
         Label seksjon = new Label("01 / SPILLELISTE");
         seksjon.getStyleClass().add("seksjon");
 
-        // Plassholdere, byttes ut med Trtack objekter i milepæl 3
+        // Plassholdere – byttes ut med Track-objekter i milepæl 3
         spilleliste.getItems().addAll("Spor 1", "Spor 2", "Spor 3");
         VBox.setVgrow(spilleliste, Priority.ALWAYS);
 
         VBox panel = new VBox(12, seksjon, spilleliste);
+        panel.getStyleClass().add("panel-venstre");
+        panel.setPrefWidth(280);
         return panel;
     }
 
+    // Lager panelet som viser hvilket spor som spilles nå
     private VBox lagSpillesNaaPanel() {
         Label seksjon = new Label("02 / SPILLES NÅ");
-    
+        seksjon.getStyleClass().add("ikon-stor");
+
+        Label ikon = new Label("♪");
+        ikon.getStyleClass().addAll("tag", "tag-blaa");
+
+        sporTittel.getStyleClass().add("tittel");
+        status.getStyleClass().addAll("tag", "tag-blaa");
+
+
+        // Innholdet i panelet som viser hvilket spor som spilles nå
+        VBox innhold = new VBox(16, ikon, sporTittel, status); // boks med tre ting under hverandre m/ 16 px mellomromm
+        innhold.setAlignment(Pos.CENTER);
+        VBox.setVgrow(innhold, Priority.ALWAYS);
+
+        // Panelet som inneholder seksjon og innhold
+        VBox panel = new VBox(12, seksjon, innhold);
+        panel.getStyleClass().add("panel");
+        return panel;
     }
 
+    // Lager panelet med kontrollknapper
+    private VBox lagKontrollPanel() {
+        forrigeKnapp.getStyleClass().add("knapp-omriss");
+        spillKnapp.getStyleClass().add("knapp-primaer");
+        pauseKnapp.getStyleClass().add("knapp-omriss");
+        stoppKnapp.getStyleClass().add("knapp-omriss");
+        nesteKnapp.getStyleClass().add("knapp-omriss");
+
+        HBox knapper = new HBox(8, forrigeKnapp, spillKnapp, pauseKnapp, stoppKnapp, nesteKnapp);
+        knapper.setAlignment(Pos.CENTER_LEFT);
+
+        Label volumTekst = new Label("VOLUM");
+        volumTekst.getStyleClass().add("mono-dim");
+        volum.setPrefWidth(140);
+
+        Region fyll = new Region();
+        HBox.setHgrow(fyll, Priority.ALWAYS);
+
+        HBox kontrollRad = new HBox(12, knapper, fyll, volumTekst, volum);
+        kontrollRad.setAlignment(Pos.CENTER_LEFT);
+
+        tid.getStyleClass().add("mono");
+        HBox.setHgrow(fremdrift, Priority.ALWAYS);
+
+        VBox panel = new VBox(14, fremdriftRad, kontrollRad);
+        panel.getStyleClass().add("panel-bunn");
+        return panel;
+
+        }
 
 
-
-
-
-
+    public Parent getRoot() {
+        return root;
+    }
 }

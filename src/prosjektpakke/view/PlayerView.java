@@ -108,6 +108,9 @@ public class PlayerView {
         tid.getStyleClass().add("mono");
         HBox.setHgrow(fremdrift, Priority.ALWAYS);
 
+        HBox fremdriftRad = new HBox(12, fremdrift, tid);
+        fremdriftRad.setAlignment(Pos.CENTER_LEFT);
+
         VBox panel = new VBox(14, fremdriftRad, kontrollRad);
         panel.getStyleClass().add("panel-bunn");
         return panel;

@@ -17,6 +17,7 @@ import javafx.scene.layout.VBox;
 import prosjektpakke.model.Playlist;
 import prosjektpakke.model.Track;
 import prosjektpakke.controller.PlayerController;
+import javafx.scene.media.MediaView;
 
 public class PlayerView {
 
@@ -34,6 +35,10 @@ public class PlayerView {
     private final Button stoppKnapp = new Button("STOPP");
     private final Button nesteKnapp = new Button("NESTE");
 
+    //Video
+    private final Label ikon = new Label("♪");
+    private final MediaView videoVisning = new MediaView();
+
     // Fremdrift og volum
     private final Slider fremdrift = new Slider(0,1,0); //mist verdi, størst verdi, verdi slider starter på
     private final Label tid = new Label("00:00 / 00:00");
@@ -43,6 +48,7 @@ public class PlayerView {
     public PlayerView(Playlist playlist) {
         PlayerController controller = new PlayerController(playlist);
         controller.settStatus(status);
+        controller.settVideoVisning(videoVisning, ikon);
         controller.settFremdriftskontroller(fremdrift, tid); // slider for tid spilt
         controller.settVolumkontroll(volum); // slider for volum
         spillKnapp.setOnAction(e -> controller.spillValgtSpor()); // Startknappen skalk funke
@@ -112,15 +118,22 @@ public class PlayerView {
         Label seksjon = new Label("SPILLES NÅ");
         seksjon.getStyleClass().add("ikon-stor");
 
-        Label ikon = new Label("♪");
+        // Label ikon = new Label("♪");
         ikon.getStyleClass().addAll("tag", "tag-blaa");
+
+        videoVisning.setFitWidth(560);
+        videoVisning.setFitHeight(315);
+        videoVisning.setPreserveRatio(true);
+        videoVisning.setVisible(false); // Skjul videoVisning som standard
+        videoVisning.setManaged(false); // Ikke ta opp plass når skjult
+
 
         sporTittel.getStyleClass().add("tittel");
         status.getStyleClass().addAll("tag", "tag-blaa");
 
 
         // Innholdet i panelet som viser hvilket spor som spilles nå
-        VBox innhold = new VBox(16, ikon, sporTittel, status); // boks med tre ting under hverandre m/ 16 px mellomromm
+        VBox innhold = new VBox(16, ikon, sporTittel, status, videoVisning); // boks med tre ting under hverandre m/ 16 px mellomromm
         innhold.setAlignment(Pos.CENTER);
         VBox.setVgrow(innhold, Priority.ALWAYS);
 

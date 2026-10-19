@@ -18,6 +18,8 @@ import prosjektpakke.model.Track;
 import javafx.scene.control.Slider;
 import javafx.util.Duration;
 import javafx.scene.control.Label;
+import javafx.scene.media.MediaView;
+
 
 public class PlayerController {
     private final Playlist playlist;
@@ -26,6 +28,14 @@ public class PlayerController {
     private Label tid;
     private Slider volum;
     private Label status;
+    private MediaView videoVisning;
+    private Label ikon;
+
+    //Video
+    public void settVideoVisning(MediaView videoVisning, Label ikon) {
+        this.videoVisning = videoVisning;
+        this.ikon = ikon;
+    }
 
     public PlayerController(Playlist playlist) {
         this.playlist = playlist;
@@ -61,7 +71,7 @@ public class PlayerController {
     // Status av sang
     public void settStatus(Label status) {
         this.status = status;
-        status.setText("KLAR · INGEN SPOR LASTET");
+        status.setText("KLAR, INGEN SPOR LASTET");
     }
 
     private void oppdaterStatus(MediaPlayer.Status nyStatus) {
@@ -102,6 +112,15 @@ public class PlayerController {
         MediaPlayer nySpiller = new MediaPlayer(media);
         mediaPlayer = nySpiller;
         nySpiller.setVolume(volum.getValue()); // Volum
+
+        // Sett opp videoVisning med mediaPlayer
+        boolean erVideo = spor.getRessurssti().toLowerCase().endsWith(".mp4");
+
+        videoVisning.setMediaPlayer(nySpiller);
+        videoVisning.setVisible(erVideo);
+        videoVisning.setManaged(erVideo);
+        ikon.setVisible(!erVideo);
+        ikon.setManaged(!erVideo);
 
         //Oppdater status av sanger
         nySpiller.statusProperty().addListener((obervasjon, gammeStatus, nyStatus) -> {

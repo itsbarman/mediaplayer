@@ -11,7 +11,7 @@ public class Playlist {
         spor.addAll(
             new Track("Space - French Fuse", "/prosjektpakke/resources/media/Spor1.mp3"),
             new Track("Passacaglia - Handel/Halvorsen", "/prosjektpakke/resources/media/Spor2.mp4"),
-            new Track("Unforgiven II - Metallica ", "/prosjektpakke/resources/media/Spor3.mp4")
+            new Track("Unforgiven II - Metallica ", "/prosjektpakke/resources/media/Spor3.mp3")
         );
 
         if (!spor.isEmpty()) {

@@ -79,6 +79,22 @@ public class PlayerController {
         }
     }
 
+    //Pause og fortsett
+    public boolean pauseEllerFortsett() {
+        if (mediaPlayer == null) {
+            return false;
+        }
+        if (mediaPlayer.getStatus() == MediaPlayer.Status.PLAYING) {
+            mediaPlayer.pause();
+            return true;          
+        }
+        if (mediaPlayer.getStatus() == MediaPlayer.Status.PAUSED) {
+            mediaPlayer.play();
+            return true;
+        }
+        return false;  
+    }
+
     private void visFeil(String melding) {
         Alert dialog = new Alert(Alert.AlertType.ERROR);
         dialog.setTitle("Avspillingsfeil");

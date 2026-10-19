@@ -61,6 +61,15 @@ public class PlayerView {
             );
         });
 
+        // Spill / pause knapp handle
+        pauseKnapp.setOnAction(e -> {
+            if (controller.pauseEllerFortsett()) {
+                pauseKnapp.setText(
+                    pauseKnapp.getText().equals("PAUSE") ? "FORTSETT" : "PAUSE"
+                );
+            }
+        });
+
         spilleliste.getSelectionModel().selectedIndexProperty().addListener(
             (observasjon, gammelIndeks, nyIndeks) -> {
                 int indeks = nyIndeks.intValue();

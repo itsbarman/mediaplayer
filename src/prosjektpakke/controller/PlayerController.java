@@ -15,13 +15,39 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import prosjektpakke.model.Playlist;
 import prosjektpakke.model.Track;
+import javafx.scene.control.Slider;
+import javafx.util.Duration;
+import javafx.scene.control.Label;
 
 public class PlayerController {
     private final Playlist playlist;
     private MediaPlayer mediaPlayer;
+    private Slider fremdrift;
+    private Label tid;
 
     public PlayerController(Playlist playlist) {
         this.playlist = playlist;
+    }
+
+    //Metode for slider med tid spilt osv
+    public void settFremdriftskontroller(Slider fremdrift, Label tid) {
+        this.fremdrift = fremdrift;
+        this.tid = tid;
+
+        fremdrift.setMin(0);
+        fremdrift.setMax(0);
+
+        // Når du slipper slideren hopper du til tid valgt
+        fremdrift.setOnMouseReleased(e -> {
+            if (mediaPlayer != null && mediaPlayer.getTotalDuration().toMillis() > 0) {
+                mediaPlayer.seek(Duration.seconds(fremdrift.getValue()));
+            }
+        });
+    }
+
+    private String formaterTid(Duration varighet) {
+        int sekunder = Math.max(0, (int) varighet.toSeconds());
+        return String.format("%02d:%02d", sekunder / 60, sekunder % 60);
     }
 
     public void spillValgtSpor() {
@@ -49,6 +75,24 @@ public class PlayerController {
             Throwable feil = nySpiller.getError();
             String melding = feil == null ? "Ukjent avspillingsfeil." : feil.getMessage();
             visFeil(melding);
+        });
+
+        // Oppdater slider og tid mens sporet spilles
+        nySpiller.setOnReady(() -> {
+            Duration varighet = nySpiller.getTotalDuration();
+            fremdrift.setMax(varighet.toSeconds());
+            tid.setText("00:00 / " + formaterTid(varighet));
+        });
+
+        nySpiller.currentTimeProperty().addListener((observasjon, gammelTid, nyTid) -> {
+            if (!fremdrift.isValueChanging()) {
+                fremdrift.setValue(nyTid.toSeconds());
+            }
+
+            tid.setText(
+                formaterTid(nyTid) + " / " +
+                formaterTid(nySpiller.getTotalDuration())
+            );
         });
 
         nySpiller.play();

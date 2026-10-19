@@ -1,5 +1,4 @@
 .vscode/
 sample/
 out/
-src/resources/media/spor2.mp4
-src/resources/media/spor3.mp4
+src/prosjektpakke/resources/media/Spor[1-3].*

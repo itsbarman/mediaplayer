@@ -1,5 +1,7 @@
 # Smart Multimedia Hub
 
+[Se prosjektet på GitHub](https://github.com/itsbarman/mediaplayer)
+
 Programmet startes fra `MainApp.java`, som er launcher-filen. Den åpner appen på hjemskjermen. Derfra kan du åpne spilleren.
 
 

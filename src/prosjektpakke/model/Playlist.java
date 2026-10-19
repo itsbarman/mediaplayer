@@ -9,9 +9,9 @@ public class Playlist {
 
     public Playlist() {
         spor.addAll(
-            new Track("Spor 1", "/prosjektpakke/resources/media/Spor1.mp3"),
-            new Track("Spor 2", "/prosjektpakke/resources/media/Spor2.mp4"),
-            new Track("Spor 3", "/prosjektpakke/resources/media/Spor3.mp4")
+            new Track("Space - French Fuse", "/prosjektpakke/resources/media/Spor1.mp3"),
+            new Track("Passacaglia - Handel/Halvorsen", "/prosjektpakke/resources/media/Spor2.mp4"),
+            new Track("Unforgiven II - Metallica ", "/prosjektpakke/resources/media/Spor3.mp4")
         );
 
         if (!spor.isEmpty()) {

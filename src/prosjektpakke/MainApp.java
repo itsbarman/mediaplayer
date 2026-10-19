@@ -1,3 +1,4 @@
+// Launcher 
 package prosjektpakke;
 
 import javafx.application.Application;

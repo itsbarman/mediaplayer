@@ -1,4 +1,5 @@
 // PlayerView – spillerskjermen, bygget med BorderPane.
+// App for mediaavspilling
 
 package prosjektpakke.view;
 
@@ -41,6 +42,7 @@ public class PlayerView {
     // Konstruktør
     public PlayerView(Playlist playlist) {
         PlayerController controller = new PlayerController(playlist);
+        controller.settStatus(status);
         controller.settFremdriftskontroller(fremdrift, tid); // slider for tid spilt
         controller.settVolumkontroll(volum); // slider for volum
         spillKnapp.setOnAction(e -> controller.spillValgtSpor()); // Startknappen skalk funke
@@ -94,7 +96,7 @@ public class PlayerView {
 
     // Sender tilbake panel
     private VBox lagSpillelistePanel() {
-        Label seksjon = new Label("01 / SPILLELISTE");
+        Label seksjon = new Label("SPILLELISTE");
         seksjon.getStyleClass().add("seksjon");
 
         VBox.setVgrow(spilleliste, Priority.ALWAYS);
@@ -107,7 +109,7 @@ public class PlayerView {
 
     // Lager panelet som viser hvilket spor som spilles nå
     private VBox lagSpillesNaaPanel() {
-        Label seksjon = new Label("02 / SPILLES NÅ");
+        Label seksjon = new Label("SPILLES NÅ");
         seksjon.getStyleClass().add("ikon-stor");
 
         Label ikon = new Label("♪");

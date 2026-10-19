@@ -25,6 +25,7 @@ public class PlayerController {
     private Slider fremdrift;
     private Label tid;
     private Slider volum;
+    private Label status;
 
     public PlayerController(Playlist playlist) {
         this.playlist = playlist;
@@ -57,6 +58,24 @@ public class PlayerController {
         });
     }
 
+    // Status av sang
+    public void settStatus(Label status) {
+        this.status = status;
+        status.setText("KLAR · INGEN SPOR LASTET");
+    }
+
+    private void oppdaterStatus(MediaPlayer.Status nyStatus) {
+        status.setText(switch (nyStatus) {
+            case READY -> "KLAR";
+            case PLAYING -> "SPILLER";
+            case PAUSED -> "PAUSET";
+            case STOPPED, DISPOSED -> "STOPPET";
+            case STALLED -> "BUFFERER";
+            case HALTED -> "FEIL";
+            case UNKNOWN -> "KLARGJØR";
+        });
+    }
+
     private String formaterTid(Duration varighet) {
         int sekunder = Math.max(0, (int) varighet.toSeconds());
         return String.format("%02d:%02d", sekunder / 60, sekunder % 60);
@@ -83,6 +102,13 @@ public class PlayerController {
         MediaPlayer nySpiller = new MediaPlayer(media);
         mediaPlayer = nySpiller;
         nySpiller.setVolume(volum.getValue()); // Volum
+
+        //Oppdater status av sanger
+        nySpiller.statusProperty().addListener((obervasjon, gammeStatus, nyStatus) -> {
+            if (mediaPlayer == nySpiller) {
+                oppdaterStatus(nyStatus);
+            }
+        });
 
         nySpiller.setOnError(() -> {
             Throwable feil = nySpiller.getError();
@@ -121,6 +147,12 @@ public class PlayerController {
             mediaPlayer.dispose();
             mediaPlayer = null;
         }
+
+        // Oppdater status til stoppet
+        if (status != null) {
+            status.setText("STOPPET");
+        }
+
     }
 
     // Forrige og neste spor

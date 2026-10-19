@@ -24,6 +24,7 @@ public class PlayerController {
     private MediaPlayer mediaPlayer;
     private Slider fremdrift;
     private Label tid;
+    private Slider volum;
 
     public PlayerController(Playlist playlist) {
         this.playlist = playlist;
@@ -41,6 +42,17 @@ public class PlayerController {
         fremdrift.setOnMouseReleased(e -> {
             if (mediaPlayer != null && mediaPlayer.getTotalDuration().toMillis() > 0) {
                 mediaPlayer.seek(Duration.seconds(fremdrift.getValue()));
+            }
+        });
+    }
+
+    //Volum
+    public void settVolumkontroll(Slider volum) {
+        this.volum = volum;
+
+        volum.valueProperty().addListener((observasjon, gammelVerdi, nyVerdi) -> {
+            if (mediaPlayer != null) {
+                mediaPlayer.setVolume(nyVerdi.doubleValue());
             }
         });
     }
@@ -70,6 +82,7 @@ public class PlayerController {
         Media media = new Media(fil.toExternalForm());
         MediaPlayer nySpiller = new MediaPlayer(media);
         mediaPlayer = nySpiller;
+        nySpiller.setVolume(volum.getValue()); // Volum
 
         nySpiller.setOnError(() -> {
             Throwable feil = nySpiller.getError();

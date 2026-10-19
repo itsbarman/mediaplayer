@@ -42,6 +42,7 @@ public class PlayerView {
     public PlayerView(Playlist playlist) {
         PlayerController controller = new PlayerController(playlist);
         controller.settFremdriftskontroller(fremdrift, tid); // slider for tid spilt
+        controller.settVolumkontroll(volum); // slider for volum
         spillKnapp.setOnAction(e -> controller.spillValgtSpor()); // Startknappen skalk funke
         spilleliste.setItems(playlist.getSpor());
         stoppKnapp.setOnAction(e -> controller.stopp()); // Stopp knapp skal funke med dette

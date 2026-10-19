@@ -59,7 +59,7 @@ public class MainApp extends Application {
         Region fyll = new Region();
         HBox.setHgrow(fyll, Priority.ALWAYS);
 
-        Label kurs = new Label("OBJ2000 · PROSJEKT 3");
+        Label kurs = new Label("OBJ2000");
         kurs.getStyleClass().add("mono-dim");
 
         HBox topp = new HBox(16, logo, hjemFane, spillerFane, undertittel, fyll, kurs);
@@ -69,7 +69,7 @@ public class MainApp extends Application {
     }
 
     private HBox lagStatusLinje() {
-        Label venstre = new Label("KLAR · INGEN SPOR LASTET");
+        Label venstre = new Label("KLAR");
         venstre.getStyleClass().add("mono-dim");
 
         Region fyll = new Region();

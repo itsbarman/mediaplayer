@@ -1,8 +1,15 @@
 # Smart Multimedia Hub
 
+Programmet startes fra `MainApp.java`, som er launcher-filen. Den åpner appen på hjemskjermen. Derfra kan du åpne spilleren.
+
+
 En JavaFX-applikasjon for å spille av lyd- og videofiler. Appen har en spilleliste, avspillingskontroller og fremdrift og volum som oppdateres mens et spor spilles.
 
+
+
 Laget som **Prosjekt 3** i **OBJ2000 Obligatorisk oppgave 2**, Objektorientert programmering 1, USN.
+ 
+
 
 ---
 
@@ -22,7 +29,15 @@ Laget som **Prosjekt 3** i **OBJ2000 Obligatorisk oppgave 2**, Objektorientert p
 ## Funksjoner
 
 - Ferdig spilleliste med minst tre mediefiler ved oppstart
+    ![Launcherens hjemskjerm](src/prosjektpakke/resources/media/sreenshots/launcher.png)
 - Spill av, pause, stopp, neste og forrige spor
+    **Spilleren med MP3:**
+
+    ![MP3-spiller](src/prosjektpakke/resources/media/sreenshots/mp3.png)
+
+    **Spilleren med video:**
+
+    ![Videospiller](src/prosjektpakke/resources/media/sreenshots/video.png)
 - Fremdriftslinje og tidsetikett som oppdateres automatisk med bindinger
 - Volumslider som er bundet til `MediaPlayer.volumeProperty()`
 - Sporet som spilles fremheves i listen, sammen med en «Spilles nå»-tekst

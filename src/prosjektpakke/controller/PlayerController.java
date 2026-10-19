@@ -1,10 +1,12 @@
-// PlayerController – styrer avspillingen.
-// - Holder på MediaPlayer for sporet som spilles nå.
-// - Spill av, pause, stopp, neste og forrige.
-// - Stopper gjeldende spor før et nytt startes.
-// - Kobler volum og fremdrift til MediaPlayer med bindinger.
-// - Viser feilmelding hvis en fil mangler eller ikke kan spilles.
-// - Stopper eller går til neste spor når et spor er ferdig.
+/**
+ * PlayerController – styrer avspillingen.
+ * Holder på MediaPlayer for sporet som spilles nå.
+ * Spill av, pause, stopp, neste og forrige.
+ * Stopper gjeldende spor før et nytt startes.
+ * Kobler volum og fremdrift til MediaPlayer med bindinger.
+ * Viser feilmelding hvis en fil mangler eller ikke kan spilles.
+ * Stopper eller går til neste spor når et spor er ferdig.
+ */
 
 package prosjektpakke.controller;
 
@@ -19,6 +21,7 @@ import javafx.scene.control.Slider;
 import javafx.util.Duration;
 import javafx.scene.control.Label;
 import javafx.scene.media.MediaView;
+import javafx.animation.PauseTransition;
 
 
 public class PlayerController {
@@ -30,6 +33,8 @@ public class PlayerController {
     private Label status;
     private MediaView videoVisning;
     private Label ikon;
+    private final PauseTransition sporskifteForsinkelse =
+        new PauseTransition(Duration.millis(240)); // Av å til å kan den ikke spille video spor hvis rask neste spor klikk, prøver å endre til høyere tid fra knappetrykk
 
     //Video
     public void settVideoVisning(MediaView videoVisning, Label ikon) {
@@ -39,6 +44,7 @@ public class PlayerController {
 
     public PlayerController(Playlist playlist) {
         this.playlist = playlist;
+        sporskifteForsinkelse.setOnFinished(e -> spillValgtSpor());
     }
 
     //Metode for slider med tid spilt osv
@@ -92,6 +98,8 @@ public class PlayerController {
     }
 
     public void spillValgtSpor() {
+        sporskifteForsinkelse.stop();
+
         Track spor = playlist.getValgtSpor();
 
         if (spor == null) {
@@ -130,6 +138,10 @@ public class PlayerController {
         });
 
         nySpiller.setOnError(() -> {
+            // Ignorer feil fra en spiller som allerede er byttet ut.
+            if (mediaPlayer != nySpiller) {
+                return;
+            }
             Throwable feil = nySpiller.getError();
             String melding = feil == null ? "Ukjent avspillingsfeil." : feil.getMessage();
             visFeil(melding);
@@ -157,6 +169,7 @@ public class PlayerController {
     }
 
     public void stopp() {
+        sporskifteForsinkelse.stop();
         stoppGjeldendeSpiller();
     }
 
@@ -177,13 +190,13 @@ public class PlayerController {
     // Forrige og neste spor
     public void nesteSpor() {
         if (playlist.nesteSpor() != null) {
-            spillValgtSpor();
+            sporskifteForsinkelse.playFromStart();
         }
     }
 
     public void forrigeSpor() {
         if (playlist.forrigeSpor() != null) {
-            spillValgtSpor();
+            sporskifteForsinkelse.playFromStart();
         }
     }
 

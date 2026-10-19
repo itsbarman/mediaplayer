@@ -96,17 +96,11 @@ Begge stiene er satt i [.vscode/settings.json](.vscode/settings.json). Endre dem
 
 > `java.debug.settings.vmArgs` må inneholde `javafx.media` i `--add-modules` for at `MediaPlayer` skal fungere.
 
-### Kjøre fra terminal
-```powershell
-$fx = "C:/javafx-windows/javafx-sdk-25.0.4/lib"
-javac -d out --module-path $fx --add-modules javafx.controls,javafx.media (Get-ChildItem -Recurse src/prosjektpakke -Filter *.java).FullName
-Copy-Item -Recurse src/prosjektpakke/resources out/prosjektpakke/ -Force
-java --module-path $fx --add-modules javafx.controls,javafx.media -cp out prosjektpakke.MainApp
-```
+
 
 ### Legge til mediefiler
 1. Legg filene i `src/prosjektpakke/resources/media/`.
-2. Bruk korte, enkle filnavn uten mellomrom eller æøå, for eksempel `spor1.mp3`.
+2. Bruk korte, enkle filnavn uten mellomrom eller æøå, som `spor1.mp3`. Kan bruke .mp4 filer også men pass på å endre playlist filen med riktig navn 
 3. Last dem inn via classpath, slik at stiene fungerer på alle maskiner:
    `getClass().getResource("/prosjektpakke/resources/media/spor1.mp3")`
 
@@ -125,22 +119,3 @@ flowchart LR
 
 **Dataflyt:** brukeren klikker i `PlayerView`. Kontrolleren oppdaterer `MediaPlayer` og `Playlist`. Bindinger sørger for at visningen oppdateres automatisk, uten manuell oppdateringslogikk.
 
-## Milepæler
-
-- [ ] **1. Oppsett og layout:** hovedvindu med plassholdere, bytte mellom hjem- og spillerskjermen
-- [ ] **2. Medieintegrasjon:** spill av én fil
-- [ ] **3. Spilleliste og valg:** valgt spor spilles av
-- [ ] **4. Kontroller og hendelser:** spill av, pause, stopp, neste, forrige og volum
-- [ ] **5. Bindinger:** fremdrift, tid og «Spilles nå» oppdateres automatisk
-- [ ] **6. Visuell tilbakemelding:** fremhev aktivt spor, statusfarger
-- [ ] **7. Integrasjon og testing:** feilhåndtering, endring av vindusstørrelse, finpuss
-
-## Innlevering
-
-| Fil | Innhold |
-|-----|---------|
-| `GruppeID.zip` | All kildekode og alle ressurser (uten `out/`) |
-| `GruppeID.pdf` | Designbeskrivelse (1–2 sider): struktur, dataflyt, grensesnittdesign, fremtidige forbedringer og eget bidrag |
-| `GruppeID.mp4` | Video på omtrent 30 sekunder som viser appen |
-
-Vurderingen ser på funksjonalitet, bruk av JavaFX-prinsipper (hendelser, bindinger, struktur), kvaliteten på grensesnittet og kodekvalitet.

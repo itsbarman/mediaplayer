@@ -44,7 +44,22 @@ public class PlayerView {
         spillKnapp.setOnAction(e -> controller.spillValgtSpor()); // Startknappen skalk funke
         spilleliste.setItems(playlist.getSpor());
         stoppKnapp.setOnAction(e -> controller.stopp()); // Stopp knapp skal funke med dette
+
+        // Neste spor knapp handle
+        nesteKnapp.setOnAction(e -> {
+            controller.nesteSpor();
+            spilleliste.getSelectionModel().select(
+                playlist.getSpor().indexOf(playlist.getValgtSpor())
+            );
+        });
       
+        // Forrige spor knapp handle
+        forrigeKnapp.setOnAction(e -> {
+            controller.forrigeSpor();
+            spilleliste.getSelectionModel().select(
+                playlist.getSpor().indexOf(playlist.getValgtSpor())
+            );
+        });
 
         spilleliste.getSelectionModel().selectedIndexProperty().addListener(
             (observasjon, gammelIndeks, nyIndeks) -> {

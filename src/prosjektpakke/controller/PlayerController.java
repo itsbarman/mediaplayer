@@ -66,6 +66,19 @@ public class PlayerController {
         }
     }
 
+    // Forrige og neste spor
+    public void nesteSpor() {
+        if (playlist.nesteSpor() != null) {
+            spillValgtSpor();
+        }
+    }
+
+    public void forrigeSpor() {
+        if (playlist.forrigeSpor() != null) {
+            spillValgtSpor();
+        }
+    }
+
     private void visFeil(String melding) {
         Alert dialog = new Alert(Alert.AlertType.ERROR);
         dialog.setTitle("Avspillingsfeil");

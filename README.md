@@ -28,8 +28,9 @@ Laget som **Prosjekt 3** i **OBJ2000 Obligatorisk oppgave 2**, Objektorientert p
 
 ## Funksjoner
 
-- Ferdig spilleliste med minst tre mediefiler ved oppstart
+- Launcher vises, kan velge programmer derifra
     ![Launcherens hjemskjerm](src/prosjektpakke/resources/media/sreenshots/launcher.png)
+- Ferdig spilleliste med minst tre mediefiler ved oppstart
 - Spill av, pause, stopp, neste og forrige spor
     **Spilleren med MP3:**
 
@@ -119,18 +120,4 @@ Begge stiene er satt i [.vscode/settings.json](.vscode/settings.json). Endre dem
 3. Last dem inn via classpath, slik at stiene fungerer på alle maskiner:
    `getClass().getResource("/prosjektpakke/resources/media/spor1.mp3")`
 
-## Arkitektur
-
-```mermaid
-flowchart LR
-    MainApp --> HomeView
-    MainApp --> PlayerView
-    MainApp --> PlayerController
-    PlayerController --> Playlist
-    Playlist --> Track
-    PlayerController -- bindinger --> PlayerView
-    PlayerView -- hendelser --> PlayerController
-```
-
-**Dataflyt:** brukeren klikker i `PlayerView`. Kontrolleren oppdaterer `MediaPlayer` og `Playlist`. Bindinger sørger for at visningen oppdateres automatisk, uten manuell oppdateringslogikk.
 

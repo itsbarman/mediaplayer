@@ -12,6 +12,7 @@ import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 import prosjektpakke.view.HomeView;
 import prosjektpakke.view.PlayerView;
+import prosjektpakke.model.Playlist;
 
 public class MainApp extends Application {
 
@@ -25,7 +26,8 @@ public class MainApp extends Application {
     @Override
     public void start(Stage stage) {
         homeView = new HomeView(this::visSpiller);
-        playerView = new PlayerView();
+        Playlist playlist = new Playlist();
+        playerView = new PlayerView(playlist);
 
         root.setTop(lagToppLinje());
         root.setBottom(lagStatusLinje());
@@ -42,7 +44,7 @@ public class MainApp extends Application {
     }
 
     private HBox lagToppLinje() {
-        Label logo = new Label("MEDIAHUB");
+        Label logo = new Label("Barman Suite");
         logo.getStyleClass().add("logo");
 
         hjemFane.getStyleClass().add("fane");

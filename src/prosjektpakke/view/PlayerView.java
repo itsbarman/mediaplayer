@@ -13,13 +13,16 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import prosjektpakke.model.Playlist;
+import prosjektpakke.model.Track;
+import prosjektpakke.controller.PlayerController;
 
 public class PlayerView {
 
     private final BorderPane root = new BorderPane();
 
     // Spilleliste og status
-    private final ListView<String> spilleliste = new ListView<>();
+    private final ListView<Track> spilleliste = new ListView<>();
     private final Label sporTittel = new Label("Ingen spor valgt");
     private final Label status = new Label("STOPPET");
 
@@ -35,18 +38,39 @@ public class PlayerView {
     private final Label tid = new Label("00:00 / 00:00");
     private final Slider volum = new Slider(0,1,0.5); // minimum verdi, maksimum verdi, startverdi
 
-    public PlayerView() {
+    // Konstruktør
+    public PlayerView(Playlist playlist) {
+        PlayerController controller = new PlayerController(playlist);
+        spillKnapp.setOnAction(e -> controller.spillValgtSpor()); // Startknappen skalk funke
+        spilleliste.setItems(playlist.getSpor());
+        stoppKnapp.setOnAction(e -> controller.stopp()); // Stopp knapp skal funke med dette
+      
+
+        spilleliste.getSelectionModel().selectedIndexProperty().addListener(
+            (observasjon, gammelIndeks, nyIndeks) -> {
+                int indeks = nyIndeks.intValue();
+                if (indeks >= 0) {
+                    playlist.velgSpor(indeks);
+                    sporTittel.setText(playlist.getValgtSpor().getTittel());
+                }
+            }
+        );
+
         root.setLeft(lagSpillelistePanel());
         root.setCenter(lagSpillesNaaPanel());
         root.setBottom(lagKontrollPanel());
+
+        // Setter fokus på spillelisten når vinduet åpnes
+        if (!playlist.getSpor().isEmpty()) {
+            spilleliste.getSelectionModel().select(0);
+        }
     }
 
+    // Sender tilbake panel
     private VBox lagSpillelistePanel() {
         Label seksjon = new Label("01 / SPILLELISTE");
         seksjon.getStyleClass().add("seksjon");
 
-        // Plassholdere – byttes ut med Track-objekter i milepæl 3
-        spilleliste.getItems().addAll("Spor 1", "Spor 2", "Spor 3");
         VBox.setVgrow(spilleliste, Priority.ALWAYS);
 
         VBox panel = new VBox(12, seksjon, spilleliste);
